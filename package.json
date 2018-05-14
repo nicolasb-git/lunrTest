@@ -1,0 +1,10 @@
+{
+  "name": "lunrTest",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node lunr1.js"
+  },
+  "dependencies": {
+    "lunr": "2.2.0"
+  }
+}
