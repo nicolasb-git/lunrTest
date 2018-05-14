@@ -1,6 +1,21 @@
+var fs = require("fs");
+var lunr = require('lunr');
 
 
-var documents = [{
+
+var documents = [];
+
+var docsFolder = './docs/';
+
+
+fs.readdirSync(docsFolder).forEach(file => {
+    console.log("File " + file);
+    var contenu = fs.readFileSync(docsFolder + file, "UTF-8");
+    documents.push({"name" : file, "text" : contenu});
+})
+
+
+/*var documents = [{
     "name": "Lunr",
     "text": "Like Solr, but much smaller, and not as bright."
 }, {
@@ -9,9 +24,9 @@ var documents = [{
 }, {
     "name": "Lodash",
     "text": "A modern JavaScript utility library delivering modularity, performance & extras."
-}]
+}]*/
 
-var lunr = require('lunr')
+
 
 var idx = lunr(function () {
     this.ref('name')
@@ -22,15 +37,13 @@ var idx = lunr(function () {
     }, this)
 })
 
-var tab = idx.search("bright")
+var tab = idx.search("volume")
 
 console.log(tab.length)
 
 tab.forEach(function(item, index, array) {
     console.log(item.ref);
     console.log(item.score);
-    console.log(item.matchData.term);
-    console.log(item.matchData.field);
 });
 
 

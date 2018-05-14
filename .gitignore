@@ -10,3 +10,4 @@ gen
 .gitignore
 .idea/
 node_modules/
+/docs/
