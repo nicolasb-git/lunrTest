@@ -3,7 +3,7 @@ var lunr = require('lunr');
 
 // load contents in array
 var documents = [];
-var docsFolder = './docs/';
+var docsFolder = './lg/';
 fs.readdirSync(docsFolder).forEach(file => {
     //console.log("File " + file);
     var contenu = fs.readFileSync(docsFolder + file, "UTF-8");
