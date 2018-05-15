@@ -47,6 +47,8 @@ search("rubber");
 search("leuchars description screen");
 search("pla*");
 search("diagram^10 plane")
+search("Cstings~1")
+search("+safety -instructions")
 
 function stripTags(html) {
 //PROCESS STRING
@@ -87,7 +89,7 @@ function sort(table) {
 
 
 function search(query) {
-    console.log("*** Search '" + query + "' - start *********************************")
+    console.log("*** Search '" + query + "' - start ******************************************************************")
     start = Date.now();
     var results = idx.search(query)
     millis = Date.now() - start;
