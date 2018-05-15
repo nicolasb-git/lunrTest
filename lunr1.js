@@ -25,17 +25,7 @@ var idx = lunr(function () {
 var millis = Date.now() - start;
 console.log("Indexing - end - " + millis)
 // do search
-console.log("Search - start")
-start = Date.now();
-var tab = idx.search("accidentally")
-millis = Date.now() - start;
-console.log("Search - end - " + millis)
-console.log(tab.length)
-console.log("Search results");
-tab.forEach(function(item, index, array) {
-    console.log("file " + item.ref);
-    console.log("score " + item.score);
-});
+search("Cstings");
 
 // write indexes
 const json1 = "idx.json";
@@ -52,7 +42,11 @@ idx = lunr.Index.load(JSON.parse(json))
 millis = Date.now() - start;
 console.log("Read indexes - end - " + millis)
 
-
+// do searches
+search("rubber");
+search("leuchars description screen");
+search("pla*");
+search("diagram^10 plane")
 
 function stripTags(html) {
 //PROCESS STRING
@@ -75,4 +69,32 @@ function stripTags(html) {
     return clean_string;
 }
 
+function sort(table) {
+    table.sort(function(a, b) {
 
+        if (a.score > b.score) {
+            return -1;
+        } else if (a.score < b.score) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    });
+    return table;
+}
+
+
+
+function search(query) {
+    console.log("*** Search '" + query + "' - start *********************************")
+    start = Date.now();
+    var results = idx.search(query)
+    millis = Date.now() - start;
+    console.log("Search - end - " + millis)
+    console.log("number of restults: " + results.length)
+    results = sort(results);
+    results.forEach(function(item, index, array) {
+        console.log("score " + item.score + " - file " + item.ref);
+    });
+}
